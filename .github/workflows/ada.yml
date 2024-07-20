@@ -26,5 +26,4 @@ jobs:
       - uses: zirkelc/adagpt@v1
         name: AdaGPT
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
           gpt_key: ${{ secrets.GPT_KEY }}
