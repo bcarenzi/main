@@ -1,11 +1,13 @@
-name: 'AdaGPT'
+name: 'AdaGPTWffix'
 
-# Run the workflow on new issues, pull requests and comments
 on:
+  # Trigger the workflow on new issues
   issues:
     types: [opened]
+  # Trigger the workflow on new pull requests
   pull_request:
     types: [opened]
+  # Trigger the workflow on new issue comments    
   issue_comment:
     types: [created]
 
@@ -15,14 +17,57 @@ permissions:
   pull-requests: write
 
 jobs:
-  # Runs for issues, pull requests and comments
-  adagpt:
-    name: AdaGPT comment
+  # This job only runs for issues
+  issue:
+    name: Issue opened
+    # Only run the job if the issue contains @AdaGPT
+    if: ${{ github.event_name == 'issues' && contains(github.event.issue.body, '@AdaGPT') }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3  
-      # The action will only run if the description or comments mentions @AdaGPT
-      - uses: zirkelc/adagpt@v1
+      - uses: ./ 
+        name: AdaGPT
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          gpt_key: ${{ secrets.GPT_KEY }}      
+
+  # This job only runs for issue comments
+  issue_comment:
+    name: Issue comment
+    # Only run the job if the comment contains @AdaGPT
+    if: ${{ github.event_name == 'issue_comment' && !github.event.issue.pull_request && contains(github.event.comment.body, '@AdaGPT') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3  
+      - uses: ./ 
+        name: AdaGPT      
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          gpt_key: ${{ secrets.GPT_KEY }}
+
+  # This job only runs for pull requests  
+  pull_request:
+    name: PR opened
+    # Only run the job if the pull request contains @AdaGPT
+    if: ${{ github.event_name == 'pull_request' && contains(github.event.pull_request.body, '@AdaGPT') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3  
+      - uses: ./ 
+        name: AdaGPT
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          gpt_key: ${{ secrets.GPT_KEY }}  
+      
+  # This job only runs for pull request comments  
+  pull_request_comment:
+    name: PR comment
+    # Only run the job if the comment contains @AdaGPT
+    if: ${{ github.event_name == 'issue_comment' && github.event.issue.pull_request && contains(github.event.comment.body, '@AdaGPT') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3  
+      - uses: ./ 
         name: AdaGPT
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
