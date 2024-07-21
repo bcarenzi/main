@@ -3,15 +3,8 @@ name: 'AdaGPT'
 # Run the workflow on new issues, pull requests, and comments mentioning @AdaGPT
 on:
   workflow_dispatch:
-    branches:
-      - main
-  issues:
-    types: [opened]
-  pull_request:
-    types: [opened]
-  issue_comment:
-    types: [created]
-
+    name: 'ada'
+   
 # Allows the workflow to create comments on issues and pull requests
 permissions:
   issues: write
@@ -38,4 +31,3 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           gpt_key: ${{ secrets.GPT_KEY }}
         if: steps.check_mention.outputs.has_mention == 'true'
-
