@@ -2,9 +2,19 @@ name: 'AdaGPT'
 
 # Run the workflow on new issues, pull requests and comments
 on:
-  issues:
-    types: [opened]
-  pull_request:
+  workflow_dispatch:
+    # Inputs the workflow accepts.
+    inputs:
+      name:
+        # Friendly description to be shown in the UI instead of 'name'
+        description: 'Person to greet'
+        # Default value if no value is explicitly provided
+        default: 'World'
+        # Input has to be provided for the workflow to run
+        required: true
+        # The data type of the input
+        type: string
+  pull_request_comment:
     types: [opened]
   issue_comment:
     types: [created]
@@ -15,15 +25,31 @@ permissions:
   pull-requests: write
 
 jobs:
-  # Runs for issues, pull requests and comments
-  adagpt:
-    name: AdaGPT comment
+  # This job only runs for issue comments
+  issue_comment:
+    name: Issue comment
+    # Only run the job if the comment contains @AdaGPT
+    if: ${{ github.event_name == 'issue_comment' && !github.event.issue.pull_request && contains(github.event.comment.body, '@AdaGPT') }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3  
-      # The action will only run if the description or comments mentions @AdaGPT
-      - uses: zirkelc/adagpt@v1
+      - uses: ./ 
+        name: AdaGPT      
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          openai_key: ${{ secrets.OPENAI_KEY }}
+
+ 
+   # This job only runs for pull request comments  
+  pull_request_comment:
+    name: PR comment
+    # Only run the job if the comment contains @AdaGPT
+    if: ${{ github.event_name == 'issue_comment' && github.event.issue.pull_request && contains(github.event.comment.body, '@AdaGPT') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3  
+      - uses: ./ 
         name: AdaGPT
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          gpt_key: ${{ secrets.GPT_KEY }}
+          openai_key: ${{ secrets.OPENAI_KEY }}
