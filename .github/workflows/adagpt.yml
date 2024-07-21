@@ -1,7 +1,6 @@
 name: 'AdaGPT'
 
 # Run the workflow on new issues, pull requests, and comments mentioning @AdaGPT
-name: 'Ada'
 on:
   push:
     branches:
@@ -10,7 +9,7 @@ on:
     branches:
       - fix/wf_file
   workflow_dispatch:
-   
+
 # Allows the workflow to create comments on issues and pull requests
 permissions:
   issues: write
