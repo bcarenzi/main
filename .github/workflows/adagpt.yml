@@ -1,4 +1,4 @@
-name: 'AdaGPTWf'
+name: 'AdaGPTWffix'
 
 on:
   # Trigger the workflow on new issues
