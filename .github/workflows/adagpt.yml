@@ -1,7 +1,10 @@
 name: 'AdaGPT'
 
-# Run the workflow on new issues, pull requests and comments
+# Run the workflow on new issues, pull requests, and comments mentioning @AdaGPT
 on:
+  workflow_dispatch:
+    branches:
+      - main
   issues:
     types: [opened]
   pull_request:
@@ -15,15 +18,29 @@ permissions:
   pull-requests: write
 
 jobs:
-  # Runs for issues, pull requests and comments
   adagpt:
     name: AdaGPT comment
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3  
-      # The action will only run if the description or comments mentions @AdaGPT
+      - uses: actions/checkout@v3
+      - name: Check for @AdaGPT mention
+        id: check_mention
+        run: |
+          if [[ "$GITHUB_EVENT_NAME" == "issue_comment" ]]; then
+            echo "::set-output name=has_mention::$(echo "$GITHUB_EVENT_PAYLOAD" | jq -r '.comment.body | contains("@AdaGPT")')"
+          else
+            echo "::set-output name=has_mention::$(echo "$GITHUB_EVENT_PAYLOAD" | jq -r '.body | contains("@AdaGPT")')"
+          fi
       - uses: zirkelc/adagpt@v1
+        id: adagpt
         name: AdaGPT
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           gpt_key: ${{ secrets.GPT_KEY }}
+        if: steps.check_mention.outputs.has_mention == 'true'
+      - name: Handle potential errors
+        run: |
+          if [[ ${{ steps.adagpt.outputs.status }} != 'success' ]]; then
+            # Add your error handling logic here, e.g., send a notification
+            echo "AdaGPT action failed: ${{ steps.adagpt.outputs.error }}"
+          fi
