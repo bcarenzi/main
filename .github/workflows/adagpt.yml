@@ -37,7 +37,7 @@ jobs:
         name: AdaGPT      
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          openai_key: ${{ secrets.OPENAI_KEY }}
+          gpt_key: ${{ secrets.GPT_KEY }}
 
  
    # This job only runs for pull request comments  
@@ -52,4 +52,4 @@ jobs:
         name: AdaGPT
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          openai_key: ${{ secrets.OPENAI_KEY }}
+          gpt_key: ${{ secrets.GPT_KEY }}
