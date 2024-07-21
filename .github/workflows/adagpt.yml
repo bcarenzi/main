@@ -14,9 +14,9 @@ on:
         required: true
         # The data type of the input
         type: string
-  pull_request_comment:
+  pull_request:
     types: [opened]
-  issue_comment:
+  issue:
     types: [created]
 
 # Allows the workflow to create comments on issues and pull requests
