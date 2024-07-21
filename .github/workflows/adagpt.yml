@@ -3,7 +3,6 @@ name: 'AdaGPT'
 # Run the workflow on new issues, pull requests, and comments mentioning @AdaGPT
 on:
   workflow_dispatch:
-    name: 'ada'
    
 # Allows the workflow to create comments on issues and pull requests
 permissions:
