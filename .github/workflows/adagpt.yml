@@ -24,8 +24,8 @@ jobs:
     if: ${{ github.event_name == 'issues' && contains(github.event.issue.body, '@AdaGPT') }}
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3  
-      - uses: ./ 
+      - name: AdaGPT in Action
+        uses: zirkelc/AdaGPT@v1
         name: AdaGPT
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
@@ -39,8 +39,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3  
-      - uses: ./ 
-        name: AdaGPT      
+      - name: AdaGPT in Action
+        uses: zirkelc/AdaGPT@v1      
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           gpt_key: ${{ secrets.GPT_KEY }}
@@ -53,8 +53,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3  
-      - uses: ./ 
-        name: AdaGPT
+      - name: AdaGPT in Action
+        uses: zirkelc/AdaGPT@v1
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           gpt_key: ${{ secrets.GPT_KEY }}  
@@ -67,8 +67,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3  
-      - uses: ./ 
-        name: AdaGPT
+      - name: AdaGPT in Action
+        uses: zirkelc/AdaGPT@v1
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           gpt_key: ${{ secrets.GPT_KEY }}
