@@ -5,11 +5,13 @@ Feature: Get character informations
     Feature Description: Search for first character
 
    Scenario: Get character name
-    Given I search for the first character into Rick and Morty API
-    When the request returs the result
-    Then I can see the character name is "Rick Sanchez"
+     Given I search for the first character into Rick and Morty API
+     When I got the result from the request
+     Then I can see the character name
 
-   Scenario: Get character status 
-    Given I search for the first character into Rick and Morty API
-    When the request returs the result
-    Then I can see the character status should not be "Dead"
+   Scenario: Rick should not be dead
+     Given I search for the first character into Rick and Morty API
+     When I got the status 
+     Then the status should not be dead
+
+
