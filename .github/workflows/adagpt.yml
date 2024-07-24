@@ -1,4 +1,4 @@
-name: 'AdaGPTWffix'
+name: 'AdaGPT'
 
 on:
   # Trigger the workflow on new issues
