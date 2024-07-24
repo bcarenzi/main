@@ -29,7 +29,7 @@ jobs:
         name: AdaGPT
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          gpt_key: ${{ secrets.GPT_KEY }}      
+          openai_key: ${{ secrets.OPENAI_KEY }}      
 
   # This job only runs for issue comments
   issue_comment:
@@ -43,7 +43,7 @@ jobs:
         uses: zirkelc/AdaGPT@v1      
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          gpt_key: ${{ secrets.GPT_KEY }}
+          openai_key: ${{ secrets.OPENAI_KEY }
 
   # This job only runs for pull requests  
   pull_request:
@@ -57,7 +57,7 @@ jobs:
         uses: zirkelc/AdaGPT@v1
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          gpt_key: ${{ secrets.GPT_KEY }}  
+          openai_key: ${{ secrets.OPENAI_KEY }  
       
   # This job only runs for pull request comments  
   pull_request_comment:
@@ -71,4 +71,4 @@ jobs:
         uses: zirkelc/AdaGPT@v1
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          gpt_key: ${{ secrets.GPT_KEY }}
+          openai_key: ${{ secrets.OPENAI_KEY }
