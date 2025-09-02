@@ -1,0 +1,5 @@
+--require spec_helper
+--color
+--format documentation
+--format progress
+--format html --out rspec_results.html

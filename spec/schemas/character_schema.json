@@ -1,0 +1,89 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Character Schema",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "ID único do personagem"
+    },
+    "name": {
+      "type": "string",
+      "description": "Nome do personagem",
+      "minLength": 1
+    },
+    "status": {
+      "type": "string",
+      "enum": ["Alive", "Dead", "unknown"],
+      "description": "Status do personagem"
+    },
+    "species": {
+      "type": "string",
+      "description": "Espécie do personagem"
+    },
+    "type": {
+      "type": "string",
+      "description": "Tipo do personagem"
+    },
+    "gender": {
+      "type": "string",
+      "enum": ["Female", "Male", "Genderless", "unknown"],
+      "description": "Gênero do personagem"
+    },
+    "origin": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Nome da origem"
+        },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL da origem"
+        }
+      },
+      "required": ["name"]
+    },
+    "location": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Nome da localização atual"
+        },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL da localização"
+        }
+      },
+      "required": ["name"]
+    },
+    "image": {
+      "type": "string",
+      "format": "uri",
+      "description": "URL da imagem do personagem"
+    },
+    "episode": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "format": "uri"
+      },
+      "description": "Lista de episódios onde o personagem aparece"
+    },
+    "url": {
+      "type": "string",
+      "format": "uri",
+      "description": "URL da API do personagem"
+    },
+    "created": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Data de criação do registro"
+    }
+  },
+  "required": ["id", "name", "status", "species"],
+  "additionalProperties": false
+}
