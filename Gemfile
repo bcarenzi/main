@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-# Gems para testes de API
+# Gems for API tests
 gem 'httparty', '~> 0.22.0'
 gem 'rspec', '~> 3.12'
 gem 'webmock', '~> 3.18'
@@ -11,7 +11,7 @@ gem 'cucumber', '~> 9.0'
 gem 'logger'
 gem 'grover', '~> 1.0'
 
-# Gems para desenvolvimento
+# Gems for development
 gem 'bundle'
 gem 'rake'
 gem 'dotenv'
