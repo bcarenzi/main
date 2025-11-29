@@ -8,7 +8,7 @@ gem 'vcr', '~> 6.1'
 gem 'json-schema', '~> 2.8'
 gem 'faker', '~> 3.2'
 
-# Gems para desenvolvimento
+# Gems for development
 gem 'bundle'
 gem 'rake'
 gem 'dotenv'
