@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-# Gems para testes de API
+# Gems for API tests
 gem 'httparty', '~> 0.22.0'
 gem 'rspec', '~> 3.12'
 gem 'webmock', '~> 3.18'
