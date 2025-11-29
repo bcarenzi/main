@@ -2,4 +2,6 @@
 --color
 --format documentation
 --format progress
---format html --out rspec_results.html
+--format html
+--out index.html
+

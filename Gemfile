@@ -7,6 +7,9 @@ gem 'webmock', '~> 3.18'
 gem 'vcr', '~> 6.1'
 gem 'json-schema', '~> 2.8'
 gem 'faker', '~> 3.2'
+gem 'cucumber', '~> 9.0'
+gem 'logger'
+gem 'grover', '~> 1.0'
 
 # Gems para desenvolvimento
 gem 'bundle'
