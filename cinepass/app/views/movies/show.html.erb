@@ -1,0 +1,46 @@
+<%= link_to '← Voltar para lista', movies_path, class: 'back-link' %>
+
+<h1><%= @movie.title %></h1>
+
+<div style="margin-top: 30px;">
+  <div class="form-group">
+    <label>Data de Exibição:</label>
+    <div style="font-size: 1.2em; color: #666;">
+      📅 <%= @movie.watched_at.strftime('%d/%m/%Y') %>
+    </div>
+  </div>
+
+  <% if @movie.rating %>
+    <div class="form-group">
+      <label>Avaliação:</label>
+      <div class="movie-rating">
+        <span class="stars" style="font-size: 2em;"><%= '⭐' * @movie.rating %><%= '☆' * (5 - @movie.rating) %></span>
+        <span style="margin-left: 15px; font-size: 1.3em; color: #666;">(<%= @movie.rating %>/5 estrelas)</span>
+      </div>
+    </div>
+  <% else %>
+    <div class="form-group">
+      <label>Avaliação:</label>
+      <div style="color: #999;">Sem avaliação</div>
+    </div>
+  <% end %>
+
+  <% if @movie.notes.present? %>
+    <div class="form-group">
+      <label>Notas:</label>
+      <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; line-height: 1.8; color: #555;">
+        <%= simple_format(@movie.notes) %>
+      </div>
+    </div>
+  <% end %>
+
+  <div style="margin-top: 30px; display: flex; gap: 10px; flex-wrap: wrap;">
+    <%= link_to '✏️ Editar', edit_movie_path(@movie), class: 'btn' %>
+    <%= link_to '📥 Exportar JSON', export_movie_path(@movie), class: 'btn btn-export' %>
+    <%= button_to '🗑️ Excluir', @movie, method: :delete, 
+                data: { confirm: 'Tem certeza que deseja excluir este filme?' }, 
+                class: 'btn btn-danger', form: { class: 'inline-form' } %>
+    <%= link_to '← Voltar', movies_path, class: 'btn btn-secondary' %>
+  </div>
+</div>
+

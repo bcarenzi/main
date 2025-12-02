@@ -1,0 +1,46 @@
+<h1>🎬 Cinepass</h1>
+<p class="subtitle">Ficha de Filmes Assistidos</p>
+
+<div class="actions">
+  <%= link_to '➕ Adicionar Novo Filme', new_movie_path, class: 'btn' %>
+  <%= link_to '📥 Exportar Todos (JSON)', export_all_movies_path, class: 'btn btn-export' %>
+</div>
+
+<% if @movies.any? %>
+  <div class="movies-grid">
+    <% @movies.each do |movie| %>
+      <div class="movie-card">
+        <div class="movie-title"><%= movie.title %></div>
+        <div class="movie-date">📅 Assistido em: <%= movie.watched_at.strftime('%d/%m/%Y') %></div>
+        
+        <% if movie.rating %>
+          <div class="movie-rating">
+            <span class="stars"><%= '⭐' * movie.rating %><%= '☆' * (5 - movie.rating) %></span>
+            <span style="margin-left: 10px; color: #666;">(<%= movie.rating %>/5)</span>
+          </div>
+        <% else %>
+          <div class="movie-rating" style="color: #999;">Sem avaliação</div>
+        <% end %>
+
+        <% if movie.notes.present? %>
+          <div class="movie-notes"><%= simple_format(movie.notes) %></div>
+        <% end %>
+
+        <div class="movie-actions">
+          <%= link_to '👁️ Ver', movie, class: 'btn btn-secondary' %>
+          <%= link_to '✏️ Editar', edit_movie_path(movie), class: 'btn btn-secondary' %>
+          <%= link_to '📥 Exportar', export_movie_path(movie), class: 'btn btn-export' %>
+          <%= button_to '🗑️ Excluir', movie, method: :delete, 
+                      data: { confirm: 'Tem certeza que deseja excluir este filme?' }, 
+                      class: 'btn btn-danger', form: { class: 'inline-form' } %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <div class="empty-state">
+    <h2>Nenhum filme cadastrado ainda</h2>
+    <p>Comece adicionando seu primeiro filme assistido!</p>
+  </div>
+<% end %>
+
