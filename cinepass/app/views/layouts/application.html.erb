@@ -289,6 +289,33 @@
 
       <%= yield %>
     </div>
+
+    <script>
+      // Handler para confirmação de exclusão usando data-confirm
+      // Compatível com button_to do Rails que coloca data-confirm no formulário
+      document.addEventListener('submit', function(event) {
+        const form = event.target;
+        
+        // Verifica se o formulário tem data-confirm (comportamento padrão do Rails button_to)
+        if (form.dataset.confirm) {
+          if (!confirm(form.dataset.confirm)) {
+            event.preventDefault();
+            event.stopPropagation();
+            return false;
+          }
+        }
+        
+        // Verifica se algum botão submit dentro do formulário tem data-confirm
+        const submitButton = form.querySelector('input[type="submit"][data-confirm], button[type="submit"][data-confirm]');
+        if (submitButton && submitButton.dataset.confirm) {
+          if (!confirm(submitButton.dataset.confirm)) {
+            event.preventDefault();
+            event.stopPropagation();
+            return false;
+          }
+        }
+      }, true); // Usa capture phase para interceptar antes do submit
+    </script>
   </body>
 </html>
 
