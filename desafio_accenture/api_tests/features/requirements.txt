@@ -1,0 +1,12 @@
+pytest
+requests
+pytest-html
+faker
+python-dotenv
+behave
+# to run the tests:
+# behave features/create_user.feature
+# behave features/rent_books.feature
+# behave features/user_validation.feature
+# behave features/search_for_available_books.feature
+# behave features/user_books_details.feature
